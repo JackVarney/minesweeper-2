@@ -1,6 +1,6 @@
 import { h } from "hyperapp";
 import { Component } from "../types/Component";
-import { createEmptyGrid, createGrid } from "../lib/createGrid";
+import { createGrid, createGridWithNoConflicts } from "../lib/createGrid";
 import { Grid } from "./grid";
 import { MinesweeperGrid } from "../types/MinesweeperGrid";
 
@@ -9,13 +9,13 @@ interface EmptyGridAttributes {
 }
 
 const EmptyGrid: Component<EmptyGridAttributes> = ({ updateGrid }) => {
-  const grid = createEmptyGrid();
+  const grid = createGrid();
 
   return (
     <Grid
       grid={grid}
-      onCellClick={() => {
-        updateGrid(createGrid());
+      onCellClick={cell => {
+        updateGrid(createGridWithNoConflicts(cell.point.x, cell.point.y));
       }}
     />
   );

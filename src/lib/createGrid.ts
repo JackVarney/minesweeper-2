@@ -5,21 +5,38 @@ const GRID_SIZE = 10;
 
 const createRange = () => Array.from({ length: GRID_SIZE });
 
-const createEmptyRow = (): MinesweeperGridCell[] =>
-  createRange().map(() => ({
-    hasMine: false,
-    revealed: false
-  }));
+const createDefaultCell = (x: number, y: number): MinesweeperGridCell => ({
+  revealed: false,
+  hasMine: Math.random() > 0.9,
+  point: {
+    x,
+    y
+  }
+});
 
-const createRow = (): MinesweeperGridCell[] =>
-  createRange().map(() => ({
-    hasMine: Math.random() > 0.9,
-    revealed: Math.random() > 0.5
-  }));
+const createGrid = (): MinesweeperGrid =>
+  createRange().map((row, y) =>
+    createRange().map((cell, x) => createDefaultCell(x, y))
+  );
 
-const createGrid = (): MinesweeperGrid => createRange().map(createRow);
+// function to ensure that the first tile a user clicks does not have a mine
+const createGridWithNoConflicts = (x: number, y: number): MinesweeperGrid => {
+  const getValidGrid = (): MinesweeperGrid => {
+    const grid = createGrid();
 
-const createEmptyGrid = (): MinesweeperGrid =>
-  createRange().map(createEmptyRow);
+    if (grid[y][x].hasMine) {
+      return getValidGrid();
+    } else {
+      return grid;
+    }
+  };
 
-export { createGrid, createEmptyGrid };
+  const grid = getValidGrid();
+
+  // user will have already revealed this tile
+  grid[y][x].revealed = true;
+
+  return grid;
+};
+
+export { createGrid, createGridWithNoConflicts };
