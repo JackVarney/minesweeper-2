@@ -2,18 +2,25 @@ import { h, View } from "hyperapp";
 import { Grid } from "./components/grid";
 import { State } from "./types/State";
 import { Actions } from "./types/Actions";
+import { MinesweeperGridCell } from "./types/MinesweeperGridCell";
+import { createGridWithNoConflicts, createGrid } from "./lib/createGrid";
 
 import "./view.postcss";
-import { EmptyGrid } from "./components/empty-grid";
 
-const view: View<State, Actions> = (state, actions) => {
+const view: View<State, Actions> = ({ grid }, { updateGrid }) => {
+  function onCellClick(cell: MinesweeperGridCell) {
+    if (grid === undefined) {
+      updateGrid(createGridWithNoConflicts(cell.point.x, cell.point.y));
+    } else {
+    }
+  }
+
   return (
     <div class="view">
-      {state.grid === undefined ? (
-        <EmptyGrid updateGrid={actions.updateGrid} />
-      ) : (
-        <Grid grid={state.grid} onCellClick={() => {}} />
-      )}
+      <Grid
+        grid={grid === undefined ? createGrid() : grid}
+        onCellClick={onCellClick}
+      />
     </div>
   );
 };
