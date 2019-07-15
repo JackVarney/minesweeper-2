@@ -1,3 +1,3 @@
-import { MinesweeperGridItem } from "./MinesweeperGridItem";
+import { MinesweeperGridCell } from "./MinesweeperGridCell";
 
-export type MinesweeperGrid = MinesweeperGridItem[][];
+export type MinesweeperGrid = MinesweeperGridCell[][] | undefined;
