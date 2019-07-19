@@ -7,7 +7,7 @@ import { createGridWithNoConflicts, createGrid } from "./lib/createGrid";
 
 import "./view.postcss";
 
-const view: View<State, Actions> = ({ grid }, { updateGrid }) => {
+const view: View<State, Actions> = ({ grid }, { updateGrid, onGameOver }) => {
   function onCellClick(cell: MinesweeperGridCell) {
     if (grid === undefined) {
       updateGrid(createGridWithNoConflicts(cell.point.x, cell.point.y));
@@ -15,6 +15,10 @@ const view: View<State, Actions> = ({ grid }, { updateGrid }) => {
       grid[cell.point.y][cell.point.x].revealed = true;
 
       updateGrid(grid);
+
+      if (cell.hasMine) {
+        onGameOver();
+      }
     }
   }
 
