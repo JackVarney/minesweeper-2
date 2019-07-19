@@ -12,6 +12,9 @@ const view: View<State, Actions> = ({ grid }, { updateGrid }) => {
     if (grid === undefined) {
       updateGrid(createGridWithNoConflicts(cell.point.x, cell.point.y));
     } else {
+      grid[cell.point.y][cell.point.x].revealed = true;
+
+      updateGrid(grid);
     }
   }
 

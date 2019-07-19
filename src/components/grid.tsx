@@ -17,7 +17,7 @@ const Grid: Component<GridAttributes> = attributes => {
   return (
     <div class="grid">
       {grid.map(row => (
-        <GridRow row={row} onCellClick={onCellClick} />
+        <GridRow row={row} onCellClick={onCellClick} grid={grid} />
       ))}
     </div>
   );
