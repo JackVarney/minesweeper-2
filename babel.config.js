@@ -6,6 +6,12 @@ const presets = [
       jsxPragma: "h",
       allExtensions: true
     }
+  ],
+  [
+    "@babel/preset-env",
+    {
+      modules: false
+    }
   ]
 ];
 

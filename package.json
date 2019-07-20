@@ -10,7 +10,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@babel/polyfill": "^7.4.4",
     "hyperapp": "^1.2.10",
     "typeface-press-start-2p": "0.0.72"
   },
@@ -36,5 +35,5 @@
     "webpack-dev-server": "^3.7.2",
     "webpack-merge": "^4.2.1"
   },
-  "browserslist": "defaults"
+  "browserslist": "> 0.25%, not dead"
 }

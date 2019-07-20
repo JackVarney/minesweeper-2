@@ -6,5 +6,8 @@ module.exports = merge(common, {
   devServer: {
     contentBase: "./dist"
   },
-  mode: "development"
+  mode: "development",
+  optimization: {
+    minimize: false
+  }
 });
