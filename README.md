@@ -1,5 +1,3 @@
-# Hyperapp Typescript Starter
+# Minesweeper
 
-Starter project for hyperapp/typescript.
-
-Configured with webpack/babel/postcss.
+Right click / Left click
