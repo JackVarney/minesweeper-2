@@ -13,15 +13,26 @@ interface GridCellAttributes {
   onCellRightClick: (cell: MinesweeperGridCell) => void;
 }
 
-function getCellClass(cell: MinesweeperGridCell): string {
+function getCellClass(
+  cell: MinesweeperGridCell,
+  grid: MinesweeperGrid
+): string {
   let base = "grid-cell";
 
-  if (cell.hasMine) {
-    base += " grid-cell--mine";
-  }
-
   if (cell.revealed) {
-    base += " grid-cell--revealed";
+    const surroundingMineCount: number = getSurroundingMineCount(cell, grid);
+
+    if (surroundingMineCount === 0) {
+      base += " grid-cell--revealed-zero";
+    } else if (surroundingMineCount === 1) {
+      base += " grid-cell--revealed-one";
+    } else if (surroundingMineCount === 2) {
+      base += " grid-cell--revealed-two";
+    } else if (surroundingMineCount === 3) {
+      base += " grid-cell--revealed-three";
+    } else {
+      base += " grid-cell--revealed-four-plus";
+    }
   } else {
     base += " grid-cell--hidden";
   }
@@ -33,25 +44,34 @@ function getCellClass(cell: MinesweeperGridCell): string {
   return base;
 }
 
+function getCellContent(
+  cell: MinesweeperGridCell,
+  grid: MinesweeperGrid
+): string {
+  let content: string = "";
+
+  const surroundingMineCount: number = getSurroundingMineCount(cell, grid);
+
+  if (cell.revealed && surroundingMineCount > 0) {
+    content = String(surroundingMineCount);
+  }
+
+  return content;
+}
+
 const GridCell: Component<GridCellAttributes> = attributes => {
   const { cell, grid, onCellClick, onCellRightClick } = attributes;
 
   return (
     <div
-      class={getCellClass(cell)}
+      class={getCellClass(cell, grid)}
       onclick={() => onCellClick(cell)}
       oncontextmenu={e => {
         e.preventDefault();
         onCellRightClick(cell);
       }}
     >
-      <span>
-        {cell.revealed
-          ? cell.hasMine
-            ? "*"
-            : getSurroundingMineCount(cell, grid)
-          : ""}
-      </span>
+      <span>{getCellContent(cell, grid)}</span>
     </div>
   );
 };

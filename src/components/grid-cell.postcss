@@ -11,23 +11,38 @@
   justify-content: center;
   align-items: center;
 
-  &--mine {
-    color: red;
+  transition: all 0.3s ease-in;
+
+  &--revealed-zero {
+    background-color: #4dd0e1;
   }
 
-  &--revealed {
-    background-color: whitesmoke;
+  &--revealed-one {
+    background-color: #00bcd4;
+  }
+
+  &--revealed-two {
+    background-color: #00acc1;
+  }
+
+  &--revealed-three {
+    background-color: #0097a7;
+  }
+
+  &--revealed-four-plus {
+    background-color: #00838f;
   }
 
   &--hidden {
-    background-color: royalblue;
+    background-color: #2196f3;
   }
 
   &--flagged {
-    background-color: orange;
+    background-color: #ff5722;
   }
 
-  span {
+  &__mine-count {
     margin: 4px 0 0 0;
+    color: rgba(255, 255, 255, 0.88);
   }
 }
