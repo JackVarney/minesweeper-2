@@ -4,8 +4,8 @@ import { State } from "./types/State";
 
 const actions: ActionsType<State, Actions> = {
   updateGrid: grid => () => ({ grid }),
-  onGameOver: () => () => {
-    alert("game over");
+  onGameOver: (message: string = "game over") => () => {
+    alert(message);
 
     return {
       grid: undefined

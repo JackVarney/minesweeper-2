@@ -7,6 +7,7 @@ import { createGridWithNoConflicts, createGrid } from "./lib/createGrid";
 
 import "./view.postcss";
 import { revealCell } from "./lib/revealCell";
+import { checkAllMinesFlagged } from "./lib/checkAllMinesFlagged";
 
 const view: View<State, Actions> = ({ grid }, { updateGrid, onGameOver }) => {
   function onCellClick(cell: MinesweeperGridCell) {
@@ -31,6 +32,10 @@ const view: View<State, Actions> = ({ grid }, { updateGrid, onGameOver }) => {
 
       updateGrid(grid);
     }
+  }
+
+  if (grid !== undefined && checkAllMinesFlagged(grid)) {
+    onGameOver("Well done, good win!");
   }
 
   return (
