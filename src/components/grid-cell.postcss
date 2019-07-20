@@ -1,9 +1,15 @@
 .grid-cell {
-  height: 1em;
-  width: 1em;
-  padding: 0.5em;
+  margin: 4px;
+  height: 1.5em;
+  width: 1.5em;
+  padding: 0.8em;
 
   cursor: pointer;
+  font-family: "Press Start 2P";
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
   &--mine {
     color: red;
@@ -19,5 +25,9 @@
 
   &--flagged {
     background-color: orange;
+  }
+
+  span {
+    margin: 4px 0 0 0;
   }
 }

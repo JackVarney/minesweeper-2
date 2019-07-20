@@ -17,11 +17,22 @@ module.exports = {
         }
       },
       {
+        test: /\.css$/,
+        use: ["style-loader", "css-loader"]
+      },
+      {
         test: /\.postcss$/,
+        use: ["style-loader", "postcss-loader"]
+      },
+      {
+        test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
         use: [
-          "style-loader",
           {
-            loader: "postcss-loader"
+            loader: "file-loader",
+            options: {
+              name: "[name].[ext]",
+              outputPath: "fonts/"
+            }
           }
         ]
       }

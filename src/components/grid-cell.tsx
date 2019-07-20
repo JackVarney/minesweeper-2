@@ -45,11 +45,13 @@ const GridCell: Component<GridCellAttributes> = attributes => {
         onCellRightClick(cell);
       }}
     >
-      {cell.revealed
-        ? cell.hasMine
-          ? "*"
-          : getSurroundingMineCount(cell, grid)
-        : ""}
+      <span>
+        {cell.revealed
+          ? cell.hasMine
+            ? "*"
+            : getSurroundingMineCount(cell, grid)
+          : ""}
+      </span>
     </div>
   );
 };
