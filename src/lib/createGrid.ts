@@ -23,7 +23,7 @@ const addMinesToGrid = (grid: MinesweeperGrid): void => {
 
     for (let y = 1; y < GRID_SIZE; y += 1) {
       for (let x = 1; x < GRID_SIZE; x += 1) {
-        const shouldAddMine = !grid[y][x].hasMine && Math.random() > 0.95;
+        const shouldAddMine = !grid[y][x].hasMine && Math.random() < 0.001;
 
         if (shouldAddMine) {
           amountOfMinesToAdd -= 1;
