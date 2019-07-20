@@ -2,11 +2,10 @@ import { Point } from "../types/Point";
 import { MinesweeperGridCell } from "../types/MinesweeperGridCell";
 import { MinesweeperGrid } from "../types/MinesweeperGrid";
 
-const iterateSurroundingCells = (
+const getSurroundingCells = (
   cell: MinesweeperGridCell,
-  grid: MinesweeperGrid,
-  cb: (x: number, y: number) => void
-) => {
+  grid: MinesweeperGrid
+): MinesweeperGridCell[] => {
   const gridSize: number = grid.length - 1;
   const cellCoords: Point = cell.point;
 
@@ -31,15 +30,19 @@ const iterateSurroundingCells = (
     yMax += 1;
   }
 
+  const surroundingCells: MinesweeperGridCell[] = [];
+
   for (let x = xMin; x <= xMax; x += 1) {
     for (let y = yMin; y <= yMax; y += 1) {
       const isCenterCell = x === cellCoords.x && y === cellCoords.y;
 
       if (!isCenterCell) {
-        cb(x, y);
+        surroundingCells.push(grid[y][x]);
       }
     }
   }
+
+  return surroundingCells;
 };
 
-export { iterateSurroundingCells };
+export { getSurroundingCells };

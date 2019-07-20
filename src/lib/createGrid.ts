@@ -1,5 +1,6 @@
 import { MinesweeperGrid } from "../types/MinesweeperGrid";
 import { MinesweeperGridCell } from "../types/MinesweeperGridCell";
+import { revealCell } from "./revealCell";
 
 const GRID_SIZE = 10;
 
@@ -35,9 +36,7 @@ const createGridWithNoConflicts = (x: number, y: number): MinesweeperGrid => {
   const grid = getValidGrid();
 
   // user will have already revealed this tile
-  grid[y][x].revealed = true;
-
-  return grid;
+  return revealCell(grid[y][x], grid);
 };
 
 export { createGrid, createGridWithNoConflicts };

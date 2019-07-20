@@ -6,6 +6,7 @@ import { MinesweeperGridCell } from "./types/MinesweeperGridCell";
 import { createGridWithNoConflicts, createGrid } from "./lib/createGrid";
 
 import "./view.postcss";
+import { revealCell } from "./lib/revealCell";
 
 const view: View<State, Actions> = ({ grid }, { updateGrid, onGameOver }) => {
   function onCellClick(cell: MinesweeperGridCell) {
@@ -16,9 +17,7 @@ const view: View<State, Actions> = ({ grid }, { updateGrid, onGameOver }) => {
         return;
       }
 
-      grid[cell.point.y][cell.point.x].revealed = true;
-
-      updateGrid(grid);
+      updateGrid(revealCell(cell, grid));
 
       if (cell.hasMine) {
         onGameOver();
