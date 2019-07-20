@@ -10,6 +10,7 @@ interface GridCellAttributes {
   cell: MinesweeperGridCell;
   grid: MinesweeperGrid;
   onCellClick: (cell: MinesweeperGridCell) => void;
+  onCellRightClick: (cell: MinesweeperGridCell) => void;
 }
 
 function getCellClass(cell: MinesweeperGridCell): string {
@@ -25,17 +26,30 @@ function getCellClass(cell: MinesweeperGridCell): string {
     base += " grid-cell--hidden";
   }
 
+  if (cell.hasFlag) {
+    base += " grid-cell--flagged";
+  }
+
   return base;
 }
 
 const GridCell: Component<GridCellAttributes> = attributes => {
-  const { cell, grid, onCellClick } = attributes;
+  const { cell, grid, onCellClick, onCellRightClick } = attributes;
 
   return (
-    <div class={getCellClass(cell)} onclick={() => onCellClick(cell)}>
-      {cell.revealed && cell.hasMine
-        ? "*"
-        : getSurroundingMineCount(cell, grid)}
+    <div
+      class={getCellClass(cell)}
+      onclick={() => onCellClick(cell)}
+      oncontextmenu={e => {
+        e.preventDefault();
+        onCellRightClick(cell);
+      }}
+    >
+      {cell.revealed
+        ? cell.hasMine
+          ? "*"
+          : getSurroundingMineCount(cell, grid)
+        : ""}
     </div>
   );
 };

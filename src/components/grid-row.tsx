@@ -10,15 +10,21 @@ interface GridRowAttributes {
   row: MinesweeperGridCell[];
   grid: MinesweeperGrid;
   onCellClick: (cell: MinesweeperGridCell) => void;
+  onCellRightClick: (cell: MinesweeperGridCell) => void;
 }
 
 const GridRow: Component<GridRowAttributes> = attributes => {
-  const { row, onCellClick, grid } = attributes;
+  const { row, onCellClick, onCellRightClick, grid } = attributes;
 
   return (
     <div class="grid-row">
       {row.map(cell => (
-        <GridCell cell={cell} onCellClick={onCellClick} grid={grid} />
+        <GridCell
+          cell={cell}
+          onCellClick={onCellClick}
+          onCellRightClick={onCellRightClick}
+          grid={grid}
+        />
       ))}
     </div>
   );

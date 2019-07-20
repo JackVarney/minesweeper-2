@@ -8,6 +8,7 @@ const createRange = () => Array.from({ length: GRID_SIZE });
 const createDefaultCell = (x: number, y: number): MinesweeperGridCell => ({
   revealed: false,
   hasMine: Math.random() > 0.9,
+  hasFlag: false,
   point: {
     x,
     y

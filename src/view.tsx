@@ -12,6 +12,10 @@ const view: View<State, Actions> = ({ grid }, { updateGrid, onGameOver }) => {
     if (grid === undefined) {
       updateGrid(createGridWithNoConflicts(cell.point.x, cell.point.y));
     } else {
+      if (cell.hasFlag) {
+        return;
+      }
+
       grid[cell.point.y][cell.point.x].revealed = true;
 
       updateGrid(grid);
@@ -22,11 +26,20 @@ const view: View<State, Actions> = ({ grid }, { updateGrid, onGameOver }) => {
     }
   }
 
+  function onCellRightClick(cell: MinesweeperGridCell) {
+    if (grid !== undefined && !cell.revealed) {
+      grid[cell.point.y][cell.point.x].hasFlag = !cell.hasFlag;
+
+      updateGrid(grid);
+    }
+  }
+
   return (
     <div class="view">
       <Grid
         grid={grid === undefined ? createGrid() : grid}
         onCellClick={onCellClick}
+        onCellRightClick={onCellRightClick}
       />
     </div>
   );
